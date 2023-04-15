@@ -1,3 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_fdf.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idelfag <idelfag@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/15 22:36:48 by idelfag           #+#    #+#             */
+/*   Updated: 2023/04/15 22:36:48 by idelfag          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fdf.h"
+
+int	wdcount(const char *s, char sep)
+{
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] == sep)
+			i++;
+		if (s[i])
+			count++;
+		while (s[i] && s[i] != sep)
+			i++;
+	}
+	return (count);
+}
+
 int    get_rows(char *filename)
 {   
     int rows;
@@ -19,7 +52,7 @@ int get_colums(char *filename)
 
     fd = open(filename, O_RDONLY, 0);
     line = get_next_line(fd);
-    colums = words_count();
+    colums = wdcount(line, ' ');
     free(line);
     close(fd);
     return(colums);
@@ -58,8 +91,11 @@ void read_fdf(char *filename, t_fdf *fdf)
         i++;
     }
     i = 0;
-    while(line = get_next_line(fd) && line != NULL)
+    while(i <= fdf->rows)
     {
+        line = get_next_line(fd);
+        if(!line)
+            break;
         fill_map(fdf->map[i], line);
         free(line);
         i++;
