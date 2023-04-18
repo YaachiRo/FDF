@@ -6,7 +6,7 @@
 /*   By: idelfag <idelfag@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 00:00:18 by idelfag           #+#    #+#             */
-/*   Updated: 2023/04/12 00:20:19 by idelfag          ###   ########.fr       */
+/*   Updated: 2023/04/18 00:34:26 by idelfag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 size_t	ft_strlen(const char *s);
 int	ft_atoi(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+int	ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	**ft_split(char const *s, char c);
-int	ft_isdigit(int c);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+
 
 #endif

@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idelfag <idelfag@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 16:14:19 by idelfag           #+#    #+#             */
-/*   Updated: 2023/04/18 00:50:11 by idelfag          ###   ########.fr       */
+/*   Created: 2022/10/14 11:49:40 by idelfag           #+#    #+#             */
+/*   Updated: 2023/04/18 00:03:28 by idelfag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "tools.h"
 
-void error(char *str, int x)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-     write(2, str, ft_strlen(str));
-     exit(x);
-}
+	size_t	i;
 
-int main(int ac, char **av)
-{
-     t_fdf fdf;
-     
-
-     if (ac != 2)
-          error("argumant are not valid\n", 1);
-     read_fdf(av[1], &fdf);
+	i = 0;
+	if (n == 0)
+		return (0);
+	while ((s1[i] != '\0' && s2[i] != '\0') && i < n - 1)
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
