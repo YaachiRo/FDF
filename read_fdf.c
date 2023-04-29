@@ -38,8 +38,6 @@ int	get_rows(char *filename)
 
 	rows = 0;
 	fd = open(filename, O_RDONLY, 0);
-    if (fd == -1)
-        error("failed to open the file\n", 1);
 	while (get_next_line(fd))
 		rows++;
 	close(fd);
@@ -53,8 +51,6 @@ int	get_colums(char *filename)
 	char *line;
 
 	fd = open(filename, O_RDONLY, 0);
-    if (fd == -1)
-        error("failed to open the file\n", 1);
 	line = get_next_line(fd);
 	colums = wdcount(line, ' ');
 	free(line);
@@ -97,13 +93,13 @@ void	read_fdf(char *filename, t_fdf *fdf)
 
 	i = 0;
 	init(filename, fdf);
-	while (i <= fdf->rows)
+	while (i < fdf->rows)
 	{
 		fdf->map[i] = (int *)malloc(sizeof(int) * (fdf->colums + 1));
 		i++;
 	}
 	i = 0;
-	while (i <= fdf->rows)
+	while (i < fdf->rows)
 	{
 		line = get_next_line(fdf->fd);
 		if (!line)
@@ -112,7 +108,6 @@ void	read_fdf(char *filename, t_fdf *fdf)
 		free(line);
 		i++;
 	}
-	free(line);
 	fdf->map[i] = NULL;
 	close(fdf->fd);
 }

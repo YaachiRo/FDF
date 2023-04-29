@@ -59,7 +59,7 @@ void	*put_zero(size_t size, size_t count)
 	size_t	i;
 
 	i = 0;
-	if (count > 0 && size > SIZE_T_MAX / count)
+	if (count > 0 && size > SIZE_MAX / count)
 		return (NULL);
 	ptr = malloc(size * count);
 	if (!ptr)

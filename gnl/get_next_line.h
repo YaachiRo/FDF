@@ -16,6 +16,7 @@
 #  define BUFFER_SIZE 5
 # endif
 
+# include <stdint.h>
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>

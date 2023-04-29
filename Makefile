@@ -1,7 +1,8 @@
 NAME 	= fdf
 
-SRCS =	main.c					\
-		read_fdf.c 				\
+SRCS =	main.c						\
+		read_fdf.c 					\
+		draw_map.c 					\
 		gnl/get_next_line.c 		\
 		gnl/get_next_line_utils.c 	\
 		tools/ft_strncmp.c 			\
@@ -19,10 +20,13 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -rf
 
+%.o: %.c
+	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+
 all : ${NAME}
 
 ${NAME}: ${OBJS}
-			${CC}  ${OBJS} -o  ${NAME}
+			${CC} ${OBJS}  -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o ${NAME}
 
 clean:
 		${RM} ${OBJS}

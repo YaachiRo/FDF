@@ -15,7 +15,8 @@
 
 # include "gnl/get_next_line.h"
 # include "tools/tools.h"
-#include <fcntl.h>
+# include <fcntl.h>
+# include "mlx_linux/mlx.h"
 
 typedef struct s_fdf
 {
@@ -23,10 +24,15 @@ typedef struct s_fdf
      int **map;
      int colums;
      int fd;
+     void *win;
+     void *mlx;
+     int zoom;
+     int color;
 }                       t_fdf   ;
 
 void read_fdf(char *filename, t_fdf *fdf);
 void error(char *str, int x);
-
+void dda(float x, float y, float x_end, float y_end, t_fdf *fdf);
+void draw_map(t_fdf *fdf);
 
 #endif
