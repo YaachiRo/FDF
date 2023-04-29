@@ -12,6 +12,48 @@
 
 #include "fdf.h"
 
+int key_hook(int x, t_fdf *fdf)
+{
+    printf("%d\n", x);
+    if(x == 65362)
+        fdf->shifty -= 25;
+    if(x == 65364)
+        fdf->shifty += 25;
+    if(x == 65363)
+        fdf->shiftx += 25;
+    if(x == 65361)
+        fdf->shiftx -= 25;
+    if(x == 119)
+        fdf->angle += 0.2;
+    if(x == 115)
+        fdf->angle -= 0.2;
+    if(x == 100)
+        fdf->angle2 += 0.1;
+    if(x == 97)
+        fdf->angle2 -= 0.1;
+    if(x == 111)
+        fdf->zoom -= 1;
+    if(x == 105)
+        fdf->zoom += 1;
+    if(x == 65307)
+        exit(0);
+    mlx_clear_window(fdf->mlx, fdf->win);
+    draw_map(fdf);
+    return(0);
+}
+
+// int mouse_hook(int action, t_fdf *fdf)
+// {
+//     printf("%d\n", action);
+//     if (action == 5)
+//         fdf->zoom -= 2;
+//     if (action == 4)
+//         fdf->zoom += 2;
+//     mlx_clear_window(fdf->mlx, fdf->win);
+//     draw_map(fdf);
+//     return(0);
+// }
+
 void error(char *str, int x)
 {
      int i = write(2, str, ft_strlen(str));
@@ -21,14 +63,20 @@ void error(char *str, int x)
 
 int main(int ac, char **av)
 {
-     t_fdf fdf;
+    t_fdf fdf;
 
-     if (ac != 2)
-          error("argumant are not valid\n", 1);
-     read_fdf(av[1], &fdf);
-     fdf.zoom = 30;
-     fdf.mlx = mlx_init();
-     fdf.win = mlx_new_window(fdf.mlx, 1000, 800, "FDF");
-     draw_map(&fdf);
-     mlx_loop(fdf.mlx);
+    if (ac != 2)
+        error("argumant are not valid\n", 1);
+    read_fdf(av[1], &fdf);
+    fdf.zoom = 30;
+    fdf.shiftx = 150;
+    fdf.shifty = 150;
+    fdf.angle = 0.8;
+    fdf.angle2 = 0.8;
+    fdf.mlx = mlx_init();
+    fdf.win = mlx_new_window(fdf.mlx, 1000, 800, "FDF");
+    draw_map(&fdf);
+    mlx_key_hook(fdf.win, key_hook, &fdf);
+    // mlx_mouse_hook(fdf.win, mouse_hook, &fdf);
+    mlx_loop(fdf.mlx);
 }

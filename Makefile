@@ -21,7 +21,7 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) -Wall -Wextra -Werror  -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 all : ${NAME}
 

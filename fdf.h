@@ -17,6 +17,7 @@
 # include "tools/tools.h"
 # include <fcntl.h>
 # include "mlx_linux/mlx.h"
+# include <stdio.h>
 
 typedef struct s_fdf
 {
@@ -28,6 +29,10 @@ typedef struct s_fdf
      void *mlx;
      int zoom;
      int color;
+     int shiftx;
+     int shifty;
+     float angle;
+     float angle2;
 }                       t_fdf   ;
 
 void read_fdf(char *filename, t_fdf *fdf);

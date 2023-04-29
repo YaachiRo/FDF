@@ -2,11 +2,24 @@
 # include <math.h>
 # include "fdf.h"
 
-#define STEP(a, b) (a > b ? a : b)
-#define MOD(i) ((i < 0) ? -i : i)
+int which(float x, float y)
+{
+    if (x > y)
+        return(x);
+    return(y);
+}
+
 float mod(float i)
 {
-    return(i < 0) ? -i : i;
+    if (i < 0)
+        i *= -1;
+    return(i);
+}
+
+void get_z(float *x, float*y, int z, float angle, float angle2)
+{
+    *x = (*x - *y) * cos(angle);
+    *y = (*y + *x) * sin(angle2) - z; 
 }
 
 void dda(float x, float y, float x_end, float y_end, t_fdf *fdf)
@@ -23,10 +36,19 @@ void dda(float x, float y, float x_end, float y_end, t_fdf *fdf)
     y *= fdf->zoom;
     x_end *= fdf->zoom;
     y_end *= fdf->zoom;
-    fdf->color = (z || z_end) ? 0xffd700 : 0xc3c7c7;
+    if (z || z_end)
+        fdf->color = 0x9ac27d;
+    else if (!z && !z_end)
+        fdf->color = 0x379ed5;
+    get_z(&x, &y, z, fdf->angle, fdf->angle2);
+    get_z(&x_end, &y_end, z_end, fdf->angle, fdf->angle2);
+    x += fdf->shiftx;
+    y += fdf->shifty;
+    x_end += fdf->shiftx;
+    y_end += fdf->shifty;
     dx = x_end - x;
     dy = y_end - y;
-    step = STEP(MOD(dx), MOD(dy));
+    step = which(mod(dx), mod(dy));
     dx /= step;
     dy /= step;
     while((int)(x - x_end) || (int)(y - y_end))
