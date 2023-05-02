@@ -1,6 +1,7 @@
 NAME 	= fdf
 
 SRCS =	main.c						\
+		matrex.c 					\
 		read_fdf.c 					\
 		draw_map.c 					\
 		gnl/get_next_line.c 		\
@@ -16,12 +17,12 @@ OBJS = ${SRCS:.c=.o}
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 RM = rm -rf
 
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror  -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 all : ${NAME}
 

@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include "mlx_linux/mlx.h"
 # include <stdio.h>
+# include "types.h"
+# include "matrex.h"
 
 typedef struct s_fdf
 {
@@ -33,11 +35,13 @@ typedef struct s_fdf
      int shifty;
      float angle;
      float angle2;
+     float angle3;
 }                       t_fdf   ;
 
 void read_fdf(char *filename, t_fdf *fdf);
 void error(char *str, int x);
-void dda(float x, float y, float x_end, float y_end, t_fdf *fdf);
+matrex_t *creat_matrex(int r, int c);
+matrex_t *mt_multiplication(matrex_t *mt1, matrex_t * mt2);
 void draw_map(t_fdf *fdf);
 
 #endif
