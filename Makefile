@@ -1,9 +1,9 @@
 NAME 	= fdf
 
-SRCS =	main.c						\
-		matrex.c 					\
-		read_fdf.c 					\
-		draw_map.c 					\
+SRCS =	srcs/main.c					\
+		matrex/matrex.c 			\
+		srcs/read_fdf.c 			\
+		srcs/draw_map.c 			\
 		gnl/get_next_line.c 		\
 		gnl/get_next_line_utils.c 	\
 		tools/ft_strncmp.c 			\
@@ -17,8 +17,7 @@ OBJS = ${SRCS:.c=.o}
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
-
+CFLAGS = -Wall -Wextra -Werror 
 RM = rm -rf
 
 %.o: %.c
@@ -27,7 +26,7 @@ RM = rm -rf
 all : ${NAME}
 
 ${NAME}: ${OBJS}
-			${CC} ${OBJS}  -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o ${NAME}
+			${CC} ${OBJS} -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o ${NAME}
 
 clean:
 		${RM} ${OBJS}

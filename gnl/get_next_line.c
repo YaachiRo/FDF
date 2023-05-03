@@ -27,7 +27,7 @@ char	*reader(char *text_holder)
 		return (NULL);
 	i = 0;
 	while (text_holder[i] && text_holder[i] != '\n')
-	{
+	{	
 		line[i] = text_holder[i];
 		i++;
 	}

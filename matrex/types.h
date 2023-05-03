@@ -20,10 +20,4 @@ typedef struct vector
 	float x, y, z;
 } vector_t;
 
-typedef struct vector2{
-	float x,y;
-} vector2_t;
-
-typedef		vector_t point_t;
-
 #endif

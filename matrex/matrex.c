@@ -102,3 +102,11 @@ matrex_t	*mt_multiplication(matrex_t *mt1, matrex_t * mt2)
 	return (result);
 }
 
+void free_mt(matrex_t *mt)
+{
+	int i = 0;
+	while (i < mt->rows)
+		free(mt->matrex[i++]);
+	free(mt->matrex);
+	free(mt);
+}

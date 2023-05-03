@@ -35,11 +35,18 @@ int	get_rows(char *filename)
 {
 	int rows;
 	int fd;
+	char *line;
 
 	rows = 0;
 	fd = open(filename, O_RDONLY, 0);
-	while (get_next_line(fd))
+	while (1)
+	{
+		line = get_next_line(fd);
+		if(!line)
+			break;
+		free(line);
 		rows++;
+	}
 	close(fd);
 	return (rows);
 }
@@ -63,6 +70,7 @@ void	fill_map(int *row, char *line)
 	char **tmp;
 	int i;
 
+
 	i = 0;
 	tmp = ft_split(line, ' ');
 	while (tmp[i])
@@ -84,6 +92,19 @@ void	init(char *filename, t_fdf *fdf)
 	fdf->rows = get_rows(filename);
 	fdf->colums = get_colums(filename);
 	fdf->map = (int **)malloc(sizeof(int *) * (fdf->rows + 1));
+}
+
+int get_max_z(int *list, int len)
+{
+	int max = 10;
+	int i = 0;
+
+	while (i < len) {
+		if(list[i] > max)
+			max = list[i];
+		i++;
+	}
+	return max;
 }
 
 void	read_fdf(char *filename, t_fdf *fdf)

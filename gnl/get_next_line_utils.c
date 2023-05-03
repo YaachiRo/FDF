@@ -36,22 +36,22 @@ char	*str_cpy(char *dst, char *src)
 	return (dst);
 }
 
-char	*str_join(char *str1, char *str2)
-{
-	char	*join;
-	char	*begginning;
+	char	*str_join(char *str1, char *str2)
+	{
+		char	*join;
+		char	*begginning;
 
-	join = malloc(sizeof(char) * (str_len(str1) + str_len(str2) + 1));
-	if (!join)
-		return (NULL);
-	begginning = join;
-	join = str_cpy(join, str1);
-	join += str_len(str1);
-	join = str_cpy(join, str2);
-	join += str_len(str2);
-	free(str1);
-	return (begginning);
-}
+		join = malloc(sizeof(char) * (str_len(str1) + str_len(str2) + 1));
+		if (!join)
+			return (NULL);
+		begginning = join;
+		join = str_cpy(join, str1);
+		join += str_len(str1);
+		join = str_cpy(join, str2);
+		join += str_len(str2);
+		free(str1);
+		return (begginning);
+	}
 
 void	*put_zero(size_t size, size_t count)
 {
