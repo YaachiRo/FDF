@@ -106,7 +106,7 @@ int	main(int ac, char **av)
 	fdf->afk = 0;
 	fdf->sclr = 1;
 	fdf->mlx = mlx_init();
-	fdf->win = mlx_new_window(fdf->mlx, 1920, 1080, "FDF");
+	fdf->win = mlx_new_window(fdf->mlx, HEIGHT, WIDTH, "FDF");
 	draw_map(fdf);
 	mlx_key_hook(fdf->win, key_hook, fdf);
 	mlx_hook(fdf->win, 17, 0l, event, fdf);

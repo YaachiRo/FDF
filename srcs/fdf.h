@@ -24,10 +24,21 @@
 
 # define THOUSAND 1000
 # define FRAME_RATE 20
-# define RATE (50)
+# define RATE 50
 # define SWEET_Y -1.2
 # define SWEET_Z 1.6
 # define ANGLERATE 0.01
+# define HEIGHT 1920
+# define WIDTH 1080
+
+typedef struct	s_data
+{
+	void	*image;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 typedef struct s_fdf
 {
@@ -52,8 +63,12 @@ typedef struct s_fdf
 	float	x_end;
 	float	y_end;
 	float	sclr;
+	float	z;
+	float	z_end;
 	float	*array1;
 	float	*array2;
+	t_data	*data;
+
 }	t_fdf;
 
 typedef struct s_vars
@@ -77,6 +92,7 @@ typedef struct s_mat
 	t_matrex	*scaller;
 }	t_mat;
 
+
 void		read_fdf(char *filename, t_fdf *fdf);
 void		error(char *str, int x);
 t_matrex	*creat_matrex(int r, int c);
@@ -90,5 +106,5 @@ void		draw_map(t_fdf *fdf);
 long		get_time(void);
 int			animate(t_fdf *fdf);
 float		angle(float angle);
-
+void		menu(t_fdf *fdf);
 #endif

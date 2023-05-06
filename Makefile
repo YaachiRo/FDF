@@ -1,8 +1,8 @@
 NAME 	= fdf
 
 SRCS =	srcs/main.c					\
-		matrex/matrex.c 			\
 		srcs/main_utils.c 			\
+		srcs/main_utils_two.c 		\
 		srcs/read_fdf.c 			\
 		srcs/draw_map.c 			\
 		srcs/matrex_funcs.c 		\
@@ -15,6 +15,7 @@ SRCS =	srcs/main.c					\
 		tools/ft_strlcpy.c 			\
 		tools/ft_strnstr.c 			\
 		tools/ft_strlen.c 			\
+		matrex/matrex.c 			\
 
 OBJS = ${SRCS:.c=.o}
 

@@ -31,18 +31,16 @@ float	gtfm(float *x, float *y, t_fdf *fdf)
 void	dda(float *array, t_fdf *fdf)
 {
 	t_vars	vars;
-	float	z;
-	float	z_end;
 
 	fdf->x = array[0];
 	fdf->y = array[1];
 	fdf->x_end = array[2];
 	fdf->y_end = array[3];
-	z = gtfm(&fdf->x, &fdf->y, fdf);
-	z_end = gtfm(&fdf->x_end, &fdf->y_end, fdf);
-	if (z || z_end)
+	fdf->z = gtfm(&fdf->x, &fdf->y, fdf);
+	fdf->z_end = gtfm(&fdf->x_end, &fdf->y_end, fdf);
+	if (fdf->z || fdf->z_end)
 		fdf->color = 0xffd700;
-	else if (!z && !z_end)
+	else if (!fdf->z && !fdf->z_end)
 		fdf->color = 0x863ca2;
 	vars.dx = fdf->x_end - fdf->x;
 	vars.dy = fdf->y_end - fdf->y;
@@ -55,6 +53,7 @@ void	dda(float *array, t_fdf *fdf)
 		fdf->x += vars.dx;
 		fdf->y += vars.dy;
 	}
+	menu(fdf);
 }
 
 // void draw_bg(t_fdf *fdf)
@@ -62,10 +61,10 @@ void	dda(float *array, t_fdf *fdf)
 
 // 	int i = 0;
 // 	int j = 0;
-// 	while (i < 800)
+// 	while (i < HEIGHT)
 // 	{
 // 		j = 0;
-// 		while (j < 1000)
+// 		while (j < WIDTH)
 // 		{
 // 			mlx_pixel_put(fdf->mlx, fdf->win, i, j, 0x3e5059);
 // 			j++;
