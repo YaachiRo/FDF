@@ -2,8 +2,11 @@ NAME 	= fdf
 
 SRCS =	srcs/main.c					\
 		matrex/matrex.c 			\
+		srcs/main_utils.c 			\
 		srcs/read_fdf.c 			\
 		srcs/draw_map.c 			\
+		srcs/matrex_funcs.c 		\
+		srcs/matrex_actions.c 		\
 		gnl/get_next_line.c 		\
 		gnl/get_next_line_utils.c 	\
 		tools/ft_strncmp.c 			\
@@ -17,11 +20,11 @@ OBJS = ${SRCS:.c=.o}
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) ${CFLAGS} -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 all : ${NAME}
 

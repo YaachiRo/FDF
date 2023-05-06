@@ -12,38 +12,19 @@
 
 #include "fdf.h"
 
-int	wdcount(const char *s, char sep)
-{
-	int i;
-	int count;
-
-	count = 0;
-	i = 0;
-	while (s[i])
-	{
-		while (s[i] == sep)
-			i++;
-		if (s[i])
-			count++;
-		while (s[i] && s[i] != sep)
-			i++;
-	}
-	return (count);
-}
-
 int	get_rows(char *filename)
 {
-	int rows;
-	int fd;
-	char *line;
+	int		rows;
+	int		fd;
+	char	*line;
 
 	rows = 0;
 	fd = open(filename, O_RDONLY, 0);
 	while (1)
 	{
 		line = get_next_line(fd);
-		if(!line)
-			break;
+		if (!line)
+			break ;
 		free(line);
 		rows++;
 	}
@@ -53,13 +34,13 @@ int	get_rows(char *filename)
 
 int	get_colums(char *filename)
 {
-	int colums;
-	int fd;
-	char *line;
+	int		colums;
+	int		fd;
+	char	*line;
 
 	fd = open(filename, O_RDONLY, 0);
 	line = get_next_line(fd);
-	colums = wdcount(line, ' ');
+	colums = words_count(line, ' ');
 	free(line);
 	close(fd);
 	return (colums);
@@ -67,9 +48,8 @@ int	get_colums(char *filename)
 
 void	fill_map(int *row, char *line)
 {
-	char **tmp;
-	int i;
-
+	char	**tmp;
+	int		i;
 
 	i = 0;
 	tmp = ft_split(line, ' ');
@@ -94,23 +74,10 @@ void	init(char *filename, t_fdf *fdf)
 	fdf->map = (int **)malloc(sizeof(int *) * (fdf->rows + 1));
 }
 
-int get_max_z(int *list, int len)
-{
-	int max = 10;
-	int i = 0;
-
-	while (i < len) {
-		if(list[i] > max)
-			max = list[i];
-		i++;
-	}
-	return max;
-}
-
 void	read_fdf(char *filename, t_fdf *fdf)
 {
-	char    *line;
-	int     i;
+	char	*line;
+	int		i;
 
 	i = 0;
 	init(filename, fdf);

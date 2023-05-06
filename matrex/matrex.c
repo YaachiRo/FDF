@@ -35,17 +35,6 @@ void fill_mt(matrex_t *mt, double* values)
 	}
 }
 
-matrex_t *from_vector_to_matrex(vector_t vt)
-{
-	matrex_t *new_mt;
-
-	new_mt = creat_matrex(1, 3);
-	new_mt->matrex[0][0] = vt.x;
-	new_mt->matrex[0][1] = vt.y;
-	new_mt->matrex[0][2] = vt.z;
-	return (new_mt);
-}
-
 double *create_cols(int c)
 {
 	int i = 0;

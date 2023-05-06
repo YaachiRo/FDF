@@ -23,6 +23,7 @@ int	ft_atoi(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int	ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	**ft_split(char const *s, char c);
+unsigned int	words_count(const char *s, char sep);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 

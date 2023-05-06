@@ -4,7 +4,12 @@
 # include<stdlib.h>
 # include<unistd.h>
 # include<math.h>
-# include "types.h"
+
+typedef struct matrex{
+	int rows;
+	int cols;
+	double **matrex;
+} matrex_t;
 
 matrex_t	*creat_matrex(int r, int c);
 matrex_t	*mt_multiplication(matrex_t *mt1, matrex_t * mt2);
