@@ -1,10 +1,10 @@
 #include "fdf.h"
 
-matrex_t	*projection_mt(matrex_t *point)
+t_matrex	*projection_mt(t_matrex *point)
 {
 	double		values[6];
-	matrex_t	*projection;
-	matrex_t	*result;
+	t_matrex	*projection;
+	t_matrex	*result;
 
 	values[0] = 1;
 	values[1] = 0;
@@ -39,10 +39,10 @@ void	calculate_total(t_vars *vars, t_fdf *fdf)
 	}
 }
 
-matrex_t	*avg(t_fdf *fdf)
+t_matrex	*avg(t_fdf *fdf)
 {
 	t_vars		vars;
-	matrex_t	*center;
+	t_matrex	*center;
 	double		values[3];
 
 	vars.total_point = fdf->colums * fdf->rows;
@@ -65,9 +65,9 @@ double	z_scale(float zoom)
 	return (zoom / 10);
 }
 
-matrex_t	*scaler(int zoom)
+t_matrex	*scaler(int zoom)
 {
-	matrex_t	*scal_mt;
+	t_matrex	*scal_mt;
 	double		values[9];
 
 	values[0] = zoom;

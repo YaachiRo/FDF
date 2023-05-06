@@ -12,7 +12,7 @@
 
 #include "tools.h"
 
-unsigned int	words_count(const char *s, char sep)
+int	words_count(const char *s, char sep)
 {
 	int	i;
 	int	count;

@@ -31,9 +31,9 @@ void	supporter(int x, t_fdf *fdf)
 	if (x == 97)
 		fdf->angle2 -= 0.1;
 	if (x == 122)
-		fdf->angle3 += 0.1;
+		fdf->angle3 += 0.05;
 	if (x == 120)
-		fdf->angle3 -= 0.02;
+		fdf->angle3 -= 0.05;
 	if (x == 65307)
 		exit(0);
 }
@@ -87,7 +87,6 @@ int	event(int keycode, t_fdf *fdf)
 	exit(0);
 	return (0);
 }
-
 
 int	main(int ac, char **av)
 {

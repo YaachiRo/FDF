@@ -7,47 +7,53 @@ int	which(float x, float y)
 	return (y);
 }
 
-
-
-void	dda(float x, float y, float x_end, float y_end, t_fdf *fdf)
+float	gtfm(float *x, float *y, t_fdf *fdf)
 {
-	t_vars		vars;
-	matrex_t	*center;
+	t_matrex	*center;
+	float		z;
+	float		old_z;
 
-	fdf->z = (fdf->map[(int)y][(int)x] * fdf->sclr);
-	fdf->z_end = (fdf->map[(int)y_end][(int)x_end] * fdf->sclr);
-	if (fdf->z || fdf->z_end)
-		fdf->color = 0xffd700;
-	else if (!fdf->z && !fdf->z_end)
-		fdf->color = 0x863ca2;
 	center = avg(fdf);
-	x -= center->matrex[0][0];
-	y -= center->matrex[1][0];
-	fdf->z -= center->matrex[2][0];
-	x_end -= center->matrex[0][0];
-	y_end -= center->matrex[1][0];
-	fdf->z_end -= center->matrex[2][0];
-	projection(&x, &y, &fdf->z, *fdf);
-	projection(&x_end, &y_end, &fdf->z_end, *fdf);
-	x += center->matrex[0][0];
-	y += center->matrex[1][0];
-	x_end += center->matrex[0][0];
-	y_end += center->matrex[1][0];
+	z = (fdf->map[(int)*y][(int)*x] * fdf->sclr);
+	old_z = z;
+	*x -= center->matrex[0][0];
+	*y -= center->matrex[1][0];
+	z -= center->matrex[2][0];
+	projection(x, y, &z, *fdf);
+	*x += center->matrex[0][0];
+	*y += center->matrex[1][0];
+	*x += fdf->shiftx;
+	*y += fdf->shifty;
 	free_mt(center);
-	x += fdf->shiftx;
-	y += fdf->shifty;
-	x_end += fdf->shiftx;
-	y_end += fdf->shifty;
-	vars.dx = x_end - x;
-	vars.dy = y_end - y;
+	return (old_z);
+}
+
+void	dda(float *array, t_fdf *fdf)
+{
+	t_vars	vars;
+	float	z;
+	float	z_end;
+
+	fdf->x = array[0];
+	fdf->y = array[1];
+	fdf->x_end = array[2];
+	fdf->y_end = array[3];
+	z = gtfm(&fdf->x, &fdf->y, fdf);
+	z_end = gtfm(&fdf->x_end, &fdf->y_end, fdf);
+	if (z || z_end)
+		fdf->color = 0xffd700;
+	else if (!z && !z_end)
+		fdf->color = 0x863ca2;
+	vars.dx = fdf->x_end - fdf->x;
+	vars.dy = fdf->y_end - fdf->y;
 	vars.step = which(fabs(vars.dx), fabs(vars.dy));
 	vars.dx /= vars.step;
 	vars.dy /= vars.step;
-	while ((int)(x - x_end) || (int)(y - y_end))
+	while ((int)(fdf->x - fdf->x_end) || (int)(fdf->y - fdf->y_end))
 	{
-		mlx_pixel_put(fdf->mlx, fdf->win, x, y, fdf->color);
-		x += vars.dx;
-		y += vars.dy;
+		mlx_pixel_put(fdf->mlx, fdf->win, fdf->x, fdf->y, fdf->color);
+		fdf->x += vars.dx;
+		fdf->y += vars.dy;
 	}
 }
 
@@ -68,7 +74,20 @@ void	dda(float x, float y, float x_end, float y_end, t_fdf *fdf)
 // 	}
 // }
 
-// draw_bg(fdf); under y = 0;
+// draw_bg(fdf);
+
+float	*array(float x, float y, float x_end, float y_end)
+{
+	float	*array;
+
+	array = malloc(sizeof(float) * 4);
+	array[0] = x;
+	array[1] = y;
+	array[2] = x_end;
+	array[3] = y_end;
+	return (array);
+}
+
 void	draw_map(t_fdf *fdf)
 {
 	int	x;
@@ -81,9 +100,17 @@ void	draw_map(t_fdf *fdf)
 		while (x < fdf->colums)
 		{
 			if (x < fdf->colums - 1)
-				dda(x, y, x + 1, y, fdf);
+			{
+				fdf->array1 = array((float)x, (float)y, (float)x + 1, (float)y);
+				dda(fdf->array1, fdf);
+				free(fdf->array1);
+			}
 			if (y < fdf->rows - 1)
-				dda(x, y, x, y + 1, fdf);
+			{
+				fdf->array2 = array((float)x, (float)y, (float)x, (float)y + 1);
+				dda(fdf->array2, fdf);
+				free(fdf->array2);
+			}
 			x++;
 		}
 		y++;

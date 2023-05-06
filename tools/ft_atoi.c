@@ -39,8 +39,7 @@ int	ft_atoi(const char *str)
 	while (ft_isdigit(str[0]))
 	{
 		n *= 10;
-		n += (str[0] - '0');
-		str++;
+		n += (str++[0] - '0');
 		if (n > LLONG_MAX && sign == -1)
 			return (0);
 		if (n > LLONG_MAX && sign == 1)

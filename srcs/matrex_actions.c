@@ -1,8 +1,8 @@
 #include "fdf.h"
 
-matrex_t	*y_rotation(float theta)
+t_matrex	*y_rotation(float theta)
 {
-	matrex_t	*rotation;
+	t_matrex	*rotation;
 	double		values[9];
 
 	values[0] = cos(theta);
@@ -19,9 +19,9 @@ matrex_t	*y_rotation(float theta)
 	return (rotation);
 }
 
-matrex_t	*x_rotation(float theta)
+t_matrex	*x_rotation(float theta)
 {
-	matrex_t	*rotation;
+	t_matrex	*rotation;
 	double		values[9];
 
 	values[0] = 1;
@@ -38,9 +38,9 @@ matrex_t	*x_rotation(float theta)
 	return (rotation);
 }
 
-matrex_t	*z_rotation(float theta)
+t_matrex	*z_rotation(float theta)
 {
-	matrex_t	*rotation;
+	t_matrex	*rotation;
 	double		values[9];
 
 	values[0] = cos(theta);
@@ -57,11 +57,11 @@ matrex_t	*z_rotation(float theta)
 	return (rotation);
 }
 
-matrex_t	*rotation_mt(matrex_t *point, float x, float y, float z)
+t_matrex	*rotation_mt(t_matrex *point, float x, float y, float z)
 {
 	t_mat		mat;
-	matrex_t	*result;
-	matrex_t	*tmp;
+	t_matrex	*result;
+	t_matrex	*tmp;
 
 	mat.y_rotation_mt = y_rotation(y);
 	mat.x_rotation_mt = x_rotation(x);
@@ -82,8 +82,8 @@ matrex_t	*rotation_mt(matrex_t *point, float x, float y, float z)
 void	projection(float *x, float *y, float *z, t_fdf fdf)
 {
 	t_mat		mat;
-	matrex_t	*mt;
-	matrex_t	*result;
+	t_matrex	*mt;
+	t_matrex	*result;
 	double		values[3];
 
 	values[0] = *x;

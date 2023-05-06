@@ -47,9 +47,13 @@ typedef struct s_fdf
 	long	t1;
 	long	t2;
 	long	afk;
-	float	z;
-	float	z_end;
+	float	x;
+	float	y;
+	float	x_end;
+	float	y_end;
 	float	sclr;
+	float	*array1;
+	float	*array2;
 }	t_fdf;
 
 typedef struct s_vars
@@ -65,23 +69,23 @@ typedef struct s_vars
 
 typedef struct s_mat
 {
-	matrex_t	*y_rotation_mt;
-	matrex_t	*x_rotation_mt;
-	matrex_t	*z_rotation_mt;
-	matrex_t	*rotated;
-	matrex_t	*scaled;
-	matrex_t	*scaller;
+	t_matrex	*y_rotation_mt;
+	t_matrex	*x_rotation_mt;
+	t_matrex	*z_rotation_mt;
+	t_matrex	*rotated;
+	t_matrex	*scaled;
+	t_matrex	*scaller;
 }	t_mat;
 
 void		read_fdf(char *filename, t_fdf *fdf);
 void		error(char *str, int x);
-matrex_t	*creat_matrex(int r, int c);
-matrex_t	*mt_multiplication(matrex_t *mt1, matrex_t *mt2);
+t_matrex	*creat_matrex(int r, int c);
+t_matrex	*mt_multiplication(t_matrex *mt1, t_matrex *mt2);
 void		projection(float *x, float *y, float *z, t_fdf fdf);
-matrex_t	*rotation_mt(matrex_t *point, float x, float y, float z);
-matrex_t	*projection_mt(matrex_t *point);
-matrex_t	*avg(t_fdf *fdf);
-matrex_t	*scaler(int zoom);
+t_matrex	*rotation_mt(t_matrex *point, float x, float y, float z);
+t_matrex	*projection_mt(t_matrex *point);
+t_matrex	*avg(t_fdf *fdf);
+t_matrex	*scaler(int zoom);
 void		draw_map(t_fdf *fdf);
 long		get_time(void);
 int			animate(t_fdf *fdf);

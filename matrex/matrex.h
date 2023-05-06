@@ -1,19 +1,21 @@
 #ifndef MATREX_H
-#define MATREX_H
+# define MATREX_H
 
 # include<stdlib.h>
 # include<unistd.h>
 # include<math.h>
 
-typedef struct matrex{
-	int rows;
-	int cols;
-	double **matrex;
-} matrex_t;
+typedef struct matrex
+{
+	int		rows;
+	int		colums;
+	double	**matrex;
+}	t_matrex;
 
-matrex_t	*creat_matrex(int r, int c);
-matrex_t	*mt_multiplication(matrex_t *mt1, matrex_t * mt2);
-void		fill_mt(matrex_t *mt, double* values);
-void		print_matrex(matrex_t *matrex);
-void        free_mt(matrex_t *mt);
+t_matrex	*creat_matrex(int r, int c);
+t_matrex	*mt_multiplication(t_matrex *mt1, t_matrex *mt2);
+void		fill_mt(t_matrex *mt, double *values);
+void		print_matrex(t_matrex *matrex);
+void		free_mt(t_matrex *mt);
+
 #endif
